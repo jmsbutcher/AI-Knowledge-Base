@@ -1,0 +1,59 @@
+
+{% extends "base.html" %}
+
+{% block heading %}<h1 align='center'>Custom Queries</h1>{% endblock %}
+
+{% block content %}
+
+<form method="POST">
+    <div class="form-group">
+        <h3>Select from knowledge base:</h3>
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="subjectSelect">Subject</label>
+            <select class="form-select" id="subjectSelect" name="subjectSelect">
+            <option selected>{{ selected_subject }}</option>
+            {% if selected_subject != wildcard_text %}
+                <option value='{{ wildcard_text }}'>{{ wildcard_text }}</option>
+            {% endif %}
+            {% for subject in subjects %}
+                <option value='{{ subject }}'>{{ subject }}</option>
+            {% endfor %}
+            </select>
+        </div>
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="predicateSelect">Predicate</label>
+            <select class="form-select" id="predicateSelect" name="predicateSelect">
+            <option selected>{{ selected_predicate }}</option>
+            {% if selected_predicate != wildcard_text %}
+                <option value='{{ wildcard_text }}'>{{ wildcard_text }}</option>
+            {% endif %}
+            {% for predicate in predicates %}
+                <option value='{{ predicate }}'>{{ predicate }}</option>
+            {% endfor %}
+            </select>
+        </div>
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="objectSelect">Object</label>
+            <select class="form-select" id="objectSelect" name="objectSelect">
+            <option selected>{{ selected_obj }}</option>
+            {% if selected_obj != wildcard_text %}
+                <option value='{{ wildcard_text }}'>{{ wildcard_text }}</option>
+            {% endif %}
+            {% for object in objects %}
+                <option value='{{ object }}'>{{ object }}</option>
+            {% endfor %}
+            </select>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+
+<div class="container">
+    <h4 align="center">Results</h4>
+    {% for result in results_text %}
+        <p>{{ result }}</p>
+    {% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,69 @@
+
+{% extends "base.html" %}
+
+{% block heading %}<h1 align="center">Knowledge Base</h1>{% endblock %}
+
+{% block content %}
+
+<h3>Add triples</h3>
+
+<form method="POST">
+    <div class="row mb-3">
+        <label for="subject" class="col-sm-2 col-form-label">Subject:</label>
+        <div class="col-sm-10">
+            <input type="text"
+                class="form-control"
+                id="subject"
+                name="subject"
+                placeholder="Enter a subject (e.g., regression .. )"/>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="predicate" class="col-sm-2 col-form-label">Predicate:</label>
+        <div class="col-sm-10">
+            <input type="text"
+                class="form-control"
+                id="predicate"
+                name="predicate"
+                placeholder="Enter a predicate (e.g., .. is a .. )"/>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="object" class="col-sm-2 col-form-label">Object:</label>
+        <div class="col-sm-10">
+            <input type="text"
+                class="form-control"
+                id="object"
+                name="object"
+                placeholder="Enter an object (e.g., .. method )"
+                aria-describedby="objectInputHelp"/>
+            <div id="objectInputHelp" class="form-text">
+                - Enclose long text in quotes ("...") to store as a literal instead of a URI.
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Enter</button>
+</form>
+
+<br />
+<br />
+
+<h3>Triples</h3>
+
+<div class="d-grid gap-2 col-6 mx-auto">
+    <button type="button" class="btn btn-primary" onClick="saveGraph()">Save</button>
+</div>
+
+<ul class="list-group list-group-flush" id="triples">
+    {% for triple in triples_text %}
+        <li class="list-group-item">{{ triple }}
+            <button type="button" class="close" onClick="deleteTriple('{{ triple }}')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </li>
+    {% endfor %}
+</ul>
+
+<p>End</p>
+
+{% endblock %}

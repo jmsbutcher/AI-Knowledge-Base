@@ -1,0 +1,62 @@
+
+{% extends "base.html" %}
+
+{% block heading %}<h1 align='center'>Machine Learning Tool Recommender</h1>{% endblock %}
+
+{% block content %}
+
+<form method="POST">
+    <div class="form-group">
+        <h3>What is the application?</h3>
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="applicationSelect">Application Type</label>
+            <select class="form-select" id="applicationSelect" name="applicationSelect">
+            <option selected>{{ selected_application }}</option>
+            {% if selected_application != default_application_text %}
+                <option value='{{ default_application_text }}'>{{ default_application_text }}</option>
+            {% endif %}
+            {% for application in applications %}
+                <option value='{{ application }}'>{{ application }}</option>
+            {% endfor %}
+            </select>
+        </div>
+
+        <br />
+        <button type="submit" class="btn btn-primary">Get Recommendation</button>
+
+    </div>
+</form>
+
+<hr>
+
+{% for method in data.keys() %}
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">{{ data[method]["name"] }}</h5>
+            
+            <h6 class="card-subtitle mb-2">Advantages:</h6>
+            <ul>
+            {% for advantage in data[method]["advantages"] %} 
+                <li>{{ advantage }}</li>
+            {% endfor %}
+            </ul>
+
+            <h6 class="card-subtitle mb-2">Disdvantages:</h6>
+            <ul>
+            {% for disadvantage in data[method]["disadvantages"] %} 
+                <li>{{ disadvantage }}</li>
+            {% endfor %}
+            </ul>
+
+            <h6 class="card-subtitle mb-2">Description:</h6>
+            <p class="card-text">{{ data[method]["description"] }}</p>
+
+            <h6 class="card-subtitle mb-2">Learn More:</h6>
+            {% for link in data[method]["links"] %} 
+                </p><a href="{{ link }}" class="card-link" target="_blank">{{ link }}</a>
+            {% endfor %}
+        </div>
+    </div>
+  {% endfor %}
+
+{% endblock %}
