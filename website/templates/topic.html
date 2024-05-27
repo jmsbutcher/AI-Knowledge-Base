@@ -1,0 +1,83 @@
+
+{% extends "base.html" %}
+
+
+{% block title %}{{ topic.name }}{% endblock %}
+
+
+{% block heading %}
+<h1 align='center'>James' Machine Learning Knowledge Base</h1>
+<h4 align='center'>by James Butcher - Version 1.0, March 2021</h4>
+{% endblock %}
+
+{% block content %}
+
+
+<h1>{{ title }}</h1>
+<p>{{ topic.description }}</p>
+
+
+
+<h3>Is a:</h3>
+<ul>
+{% for is_a in is_a_items %}
+
+    <li>{{ is_a }}</li>
+
+{% endfor %}
+</ul>
+
+
+<h3>Definition:</h3>
+<ul>
+{% for definition in definitions %}
+
+    <li>{{ definition }}</li>
+
+{% endfor %}
+</ul>
+
+
+<h3>Capabilities:</h3>
+<ul>
+    {% for capability in capabilities %}
+    
+        <li>{{ capability }}</li>
+    
+    {% endfor %}
+</ul>
+
+
+<h3>Advantages:</h3>
+<ul>
+    {% for advantage in advantages %}
+    
+        <li>{{ advantage }}</li>
+    
+    {% endfor %}
+</ul>
+
+
+<h3>Disadvantages:</h3>
+<ul>
+    {% for disadvantage in disadvantages %}
+    
+        <li>{{ disadvantage }}</li>
+    
+    {% endfor %}
+</ul>
+
+
+{#
+{% for content_page in content_pages %}
+    <h2><a href="{{ url_for('content_page', content_page_id=content_page.id) }}">{{ content_page.title }}</a></h2>
+    {{ content_page.content | safe }}
+    {{ content_page.code_snippet }}
+    {% for link in links %}
+        <p>Related topic: <a href="{{ url_for('topic', topic_id=link.target_topic_id) }}">{{ link.target_topic.name }}</a></p>
+    {% endfor %}
+{% endfor %}
+#}
+
+
+{% endblock %}

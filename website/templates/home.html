@@ -3,12 +3,21 @@
 
 {% block heading %}
 <h1 align='center'>James' Machine Learning Knowledge Base</h1>
-<h4 align='center'>by James Butcher - Version 1.0, March 2021</h4>
+<h4 align='center'>James Butcher - Version 2.0, May 2024</h4>
 {% endblock %}
 
 {% block content %}
 
 <div class="container-sm">
+
+
+<h1>Index</h1>
+<ul>
+    {% for topic in topics %}
+        <li><a href="{{ url_for('views.topic', topic_id=topic.id) }}">{{ topic.name }}</a></li>
+    {% endfor %}
+</ul>
+
 
 <h4>Introduction</h4>
 

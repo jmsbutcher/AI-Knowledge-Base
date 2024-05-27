@@ -5,6 +5,7 @@ from .kb_graph import graph, n, add_triple, generator_to_list, \
                      isolate_last_part_of_URI, input_new_triple, \
                      string_to_URI, triple_to_text, text_to_triple, save_graph
 
+from .cms import Topic, ContentPage
 
 views = Blueprint('views', __name__)
 
@@ -13,7 +14,63 @@ views = Blueprint('views', __name__)
 
 @views.route('/')
 def home():
-    return render_template('home.html')
+    topics = Topic.query.all()
+    for t in topics:
+        print(t.name)
+        print(url_for('views.topic', topic_id=t.id))
+
+    return render_template('home.html', topics=topics)
+
+
+def get_attributes(topic, relation):
+        atts = graph.triples((string_to_URI(topic.name), relation, None))
+        return [isolate_last_part_of_URI(a[2]).replace("_", " ") for a in atts]
+
+
+@views.route('/topic/<int:topic_id>')
+def topic(topic_id):
+
+    #return "<h1>Topic ID: " + str(topic_id) + "</h1>"
+
+    topic = Topic.query.get(topic_id)
+
+    # Title
+    title = topic.name.replace("_", " ").title()
+
+    # What it is - "is a"
+    is_a_items = get_attributes(topic, n.is_a)
+
+    # Definition - "definition" 
+    definitions = get_attributes(topic, n.definition)
+    
+    # Capabilities - "can do" 
+    capabilites = get_attributes(topic, n.can_do)
+
+    # Advantages - "has advantage"
+    advantages = get_attributes(topic, n.has_advantage)
+
+    # Disadvantages - "has disadvantage"
+    disadvantages = get_attributes(topic, n.has_disadvantage)
+
+
+    return render_template("topic.html", 
+                           topic=topic, 
+                           title=title,
+                           is_a_items=is_a_items,
+                           definitions=definitions,
+                           capabilites=capabilites,
+                           advantages=advantages,
+                           disadvantages=disadvantages)
+
+
+
+
+@views.route('/content_page/<int:content_page_id>')
+def content_page(content_page_id):
+    #content_page = ContentPage.query.get(content_page_id)
+    #links = Link.query.filter(Link.source_topic_id == content_page.topic_id).all()
+    #return render_template('content_page.html', content_page=content_page, links=links)
+    return render_template('content_page.html')
 
 
 @views.route('/knowledge-base', methods=['GET', 'POST'])

@@ -1,0 +1,19 @@
+
+{% block heading %}
+<h1 align='center'>James' Machine Learning Knowledge Base</h1>
+<h4 align='center'>by James Butcher - Version 1.0, March 2021</h4>
+{% endblock %}
+
+{% block content %}
+
+
+<h1>{{ content_page.title }}</h1>
+    {{ content_page.content | safe }}
+    {{ content_page.code_snippet }}
+    {% for link in links %}
+        <p>Related topic: <a href="{{ url_for('topic', topic_id=link.source_topic_id) }}">{{ link.source_topic.name }}</a></p>
+    {% endfor %}
+
+
+{% endblock %}
+
