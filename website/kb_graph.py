@@ -149,6 +149,15 @@ def text_to_triple(triple_text):
     return triple
 
 
+# def text_to_triple(s_text, p_text, o_text):
+#     """ Convert a plain-text triple into a regular triple with URIs (or a Literal) """
+#     s = string_to_URI(s_text)
+#     p = string_to_URI(p_text)
+#     o = string_to_URI(o_text)
+#     triple = (s, p, o)
+#     return triple
+
+
 #-----------------------------------------------------------------------------------------------------
 # Adding and Removing Triples
 #-----------------------------------------------------------------------------------------------------
@@ -182,7 +191,19 @@ def input_new_triple(subject, predicate, obj):
 def add_triple(subject, predicate, obj):
     """ Add a (subject, predicate, obj) triple to the graph """
     new_triple = (subject, predicate, obj)
-    graph.add(new_triple)
+    if new_triple not in graph:
+        graph.add(new_triple)
+        print("\nAdded triple: ", triple_to_text(new_triple))
+    else:
+        print("\nTriple already exists!")
+
+
+def remove_triple(triple):
+    if triple in graph:
+        graph.remove(triple)
+        print("\nRemoved triple: ", triple_to_text(triple))
+    else:
+        print("\nCan't remove triple, not found:", triple_to_text(triple))
 
 
 def remove_last_triple():

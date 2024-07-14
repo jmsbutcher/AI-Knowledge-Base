@@ -129,7 +129,8 @@ mykb:linear_regression mykb:can_do mykb:feature_importance,
 
 mykb:logistic_regression mykb:can_do mykb:classification,
         mykb:image_classification ;
-    mykb:description " The logistic model (or logit model) is used to model the probability of a certain class or event existing such as pass/fail, win/lose, etc. When a cutoff probability is specified, the model acts as a binary classifier. Can also be extended into a multi-class classifier." ;
+    mykb:description " The logistic model (or logit model) is used to model the probability of a certain class or event existing such as pass/fail, win/lose, etc. When a cutoff probability is specified, the model acts as a binary classifier. Can also be extended into a multi-class classifier.",
+        "The logistic model (or logit model) is used to model the probability of a certain class or event existing such as pass/fail, win/lose, etc. When a cutoff probability is specified, the model acts as a binary classifier. Can also be extended into a multi-class classifier." ;
     mykb:has_advantage mykb:interpretable,
         mykb:very_simple,
         mykb:widely_used ;

@@ -22,8 +22,9 @@ def create_app():
     # Initalize Database 
     app.config['SQLALCHEMY_DATABASE_URI'] = DB_URI
     db.init_app(app)
-
     with app.app_context():
+
+        db.drop_all()
         db.create_all()
 
         # Current topics:
@@ -41,8 +42,13 @@ def create_app():
         existing_topics = set([t.name for t in Topic.query.all()])
         for topic in topics:
             if topic not in existing_topics:
-                new_topic = Topic(name=topic, 
-                                description="[ description ]")
+
+                new_topic = Topic(
+                    name=topic, 
+                    textname=topic.replace("_", " ").title(),
+                    description="[description]"
+                    )
+                
                 db.session.add(new_topic)
 
         

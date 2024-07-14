@@ -20,7 +20,7 @@ DB_URI = "sqlite:///" + DB_NAME
 class Topic(db.Model):
     id: Mapped[int] = mapped_column(db.Integer, primary_key=True)
     name: Mapped[str] = mapped_column(db.String, unique=True, nullable=False)
-    #name: Mapped[str] = mapped_column(db.String, unique=True, nullable=False)
+    textname: Mapped[str] = mapped_column(db.String, unique=False, nullable=True)
     description: Mapped[str] = mapped_column(db.Text)
 
 # class Topic(db.Model):
