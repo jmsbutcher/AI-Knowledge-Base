@@ -16,7 +16,6 @@ def create_app():
 
     # Initalize Flask
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = '2948sciWEO8c28HeK02Kejg2'
     app.register_blueprint(views, url_prefix='/')
 
 
