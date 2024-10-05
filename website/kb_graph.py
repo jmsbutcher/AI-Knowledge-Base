@@ -1,5 +1,4 @@
 import os
-import pathlib
 from rdflib import Graph, Namespace, Literal, URIRef
 from .common import get_website_dir
 
@@ -29,7 +28,7 @@ def get_graph_path(format="n3"):
 
 def save_graph(save_format="n3"):
     """ Save graph file """
-    #graph.serialize(destination="graph.{}".format(save_format), format=save_format)
+
     graph.serialize(destination=get_graph_path().format(save_format), format=save_format)
     print("Saved graph as graph.{}".format(save_format))
 
@@ -37,69 +36,11 @@ def save_graph(save_format="n3"):
 def load_graph(load_format=None):
     """ Load saved graph file """
 
-    # script_dir = os.path.dirname(os.path.abspath(__file__))
-
-    # script_dir = script_dir.replace("\\\\wsl.localhost\\", "\\\\")
-
-    # print("Script dir:", script_dir, "\n")
-
-    # Construct the path to the graph file relative to the script directory
-    #graph_file = os.path.join(script_dir, "graph.n3")
     graph_file = get_graph_path()
     print("graph file: ", graph_file, "\n")
 
     # Load the graph using rdflib
     graph.parse(location=graph_file, format="n3")
-    return
-
-
-
-    root = pathlib.Path(os.getcwd())
-    print("Working directory:", root, "\n")
-    filename = pathlib.Path("graph.n3")
-    graph.parse(location="./graph.n3")
-    return
-
-    # By default, try some common graph file extensions
-    if load_format is None:
-        load_formats = ["nt", "n3", "turtle", "xml", "pretty-xml"]
-        for f in load_formats:
-            try:
-                #graph.parse("graph.n3", None, format=f)
-                #graph.load("graph.{}".format(f), format=f)
-                
-                
-                #print("Working directory:", os.getcwd(), "\n")
-
-                root = pathlib.Path(os.getcwd())
-                print("Working directory:", root, "\n")
-
-                #graph_path = "graph.{}".format(f)
-                #graph_path = os.getcwd() + "graph.{}".format(f)
-                graph_name = "graph.{}".format(f)
-                graph_path = root / graph_name
-                print("Graph path:", graph_path, "\n")
-
-                graph.load(graph_name, format=f)
-                #graph.parse(graph_name)
-                print("Loaded file", graph_name)
-                return True
-            
-            # except FileNotFoundError:
-            #     pass
-            except Exception:
-                pass
-        print("No graph found.")
-        return False
-    # If a specific graph file extension is passed as an argument, try that one
-    else:
-        try:
-            graph.load("graph.{}".format(load_format), format=load_format)
-            print("Loaded file 'graph.{}'".format(load_format))
-            return True
-        except FileNotFoundError:
-            print("Graph file 'graph.{}' not found.".format(load_format))
-            return False
 
 
 
@@ -115,15 +56,6 @@ def get_all_topics():
     topics.sort()
     return topics
 
-# def get_objects(topic, relation, target=None):
-#     """ Get all the objects of a relation for the given subject. """  
-#     objs = graph.triples((string_to_URI(topic), relation, target))
-#     return [isolate_last_part_of_URI(a[2]).replace("_", " ") for a in objs]
-
-# def get_subjects(topic, relation, target=None):
-#     """ Get all the subjects of a relation for the given object. """  
-#     subs = graph.triples((target, relation, string_to_URI(topic)))
-#     return [isolate_last_part_of_URI(a[0]).replace("_", " ") for a in subs]
 
 
 #-----------------------------------------------------------------------------------------------------
@@ -179,14 +111,6 @@ def text_to_triple(triple_text):
     triple = (s, p, o)
     return triple
 
-
-# def text_to_triple(s_text, p_text, o_text):
-#     """ Convert a plain-text triple into a regular triple with URIs (or a Literal) """
-#     s = string_to_URI(s_text)
-#     p = string_to_URI(p_text)
-#     o = string_to_URI(o_text)
-#     triple = (s, p, o)
-#     return triple
 
 
 #-----------------------------------------------------------------------------------------------------

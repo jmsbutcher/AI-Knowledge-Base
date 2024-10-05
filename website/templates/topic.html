@@ -71,21 +71,6 @@
     </ul>
 {% endif %}
 
-<!--
-<h3>Advantages:</h3>
-<ul class="list-group list-group-flush" id="triples">
-    {% for advantage in advantages %}
-        <li class="list-group-item">{{ advantage }}
-            <button type="button" class="close" onClick="deleteAdvantage('{{ topic.id }}', '{{ advantage }}')">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </li>
-    {% endfor %}
-</ul>
--->
-
-<!--<button type="button" class="btn btn-primary" onClick="addAdvantage()">Add</button>
--->
 
 <!-- Advantages -->
 {% if advantages|length > 0 %}

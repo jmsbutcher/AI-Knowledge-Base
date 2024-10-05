@@ -1,33 +1,15 @@
 from pathlib import Path
 from .common import get_website_dir
-from flask import Blueprint, flash, jsonify, render_template, redirect, \
-                  request, send_file, send_from_directory, url_for
+from flask import Blueprint, flash, jsonify, render_template, \
+                  request, send_file
 import json
 from .kb_graph import graph, n, add_triple, generator_to_list, \
-                     get_all_topics, \
                      isolate_last_part_of_URI, input_new_triple, \
-                     remove_triple, string_to_URI, triple_to_text, \
+                     string_to_URI, triple_to_text, \
                      text_to_triple, save_graph
-
-#from .cms import Topic, ContentPage
-
+\
 views = Blueprint('views', __name__)
 
-
-
-# def get_objects(topic, relation, target=None):
-#     """ Get all the objects of a relation for the given subject. """
-
-#     #objs = graph.triples((string_to_URI(topic), relation, None))
-#     #return [isolate_last_part_of_URI(a[2]).replace("_", " ") for a in objs]
-
-#     objs = graph.triples((string_to_URI(topic), relation, None))
-#     print(objs)
-#     for o in objs:
-#         print(o)
-#     objects_strings = [isolate_last_part_of_URI(a[2]).replace("_", " ") for a in objs]
-#     print(objects_strings)
-#     return objects_strings
 
 def get_subjects(topic, relation, target=None):
     """ Get all the subjects of a relation for the given object. """  
@@ -39,17 +21,6 @@ def get_attributes(topic, relation):
     return [isolate_last_part_of_URI(a[2]).replace("_", " ") for a in atts]
 
 
-
-
-# @views.route('/')
-# def home():
-#     topics = get_all_topics()
-
-#     for t in topics:
-#         print(t)
-#         print(url_for('views.topic', topic=t))
-
-#     return render_template('home.html', topics=topics)
 
 @views.route('/')
 def home():
@@ -91,7 +62,6 @@ def topic(topic):
     # If the topic is a [method], list the applications it can do.
     applications = get_attributes(topic, n.can_do)
     print("Applications:", applications)
-
 
     # Methods - "can do" - <subject>
     methods = get_subjects(topic, n.can_do)
@@ -176,9 +146,6 @@ def knowledge_base():
 
 @views.route('/download/<path:filepath>', methods=['GET', 'POST'])
 def download(filepath):
-    #return send_from_directory(directory=get_website_dir(), filename=filename)
-    #return send_from_directory(directory=get_website_dir(), path=filename)
-
     path = Path(get_website_dir()) / filepath
     return send_file(path, as_attachment=True)
 
@@ -306,25 +273,6 @@ def delete_triple():
     graph.remove(original_triple)
     return jsonify({})
 
-# @views.route('/delete-advantage', methods=['POST'])
-# def delete_advantage():
-#     """ Delete the advantage whose 'X' was clicked from the graph """
-#     data = json.loads(request.data)
-#     topic_id = data['topic_id']
-#     advantage = data['advantage']
-    
-#     topic = Topic.query.get(int(topic_id))
-#     subject = topic.name
-
-#     triple = tuple(
-#         string_to_URI(subject), 
-#         string_to_URI("has advantage"),
-#         string_to_URI(advantage)
-#     )
-
-#     remove_triple(triple)
-
-#     return jsonify({})
 
 @views.route('/save-graph', methods=['GET', 'POST'])
 def save():
