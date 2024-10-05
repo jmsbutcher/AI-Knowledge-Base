@@ -4,6 +4,7 @@ mykb:autoencoder mykb:can_do mykb:anomaly_detection,
         mykb:dimensionality_reduction,
         mykb:feature_extraction,
         mykb:feature_learning,
+        mykb:fortune_telling,
         mykb:image_compression,
         mykb:machine_translation,
         mykb:noise_reduction,
@@ -59,6 +60,7 @@ mykb:decision_tree mykb:can_do mykb:capture_interactions_in_data,
         mykb:recommendation,
         mykb:regression ;
     mykb:description "A decision tree is a flowchart-like structure in which each internal node represents a test on an attribute (e.g. whether a coin flip comes up heads or tails), each branch represents the outcome of the test, and each leaf node represents a class label (decision taken after computing all attributes). The paths from root to leaf represent classification rules. -Wikiedia" ;
+    mykb:example mykb:001-DecisionTree ;
     mykb:has_advantage mykb:interpretable,
         "can deal with data where features interact with each other",
         "can deal with large, complicated, differently-scaled data",

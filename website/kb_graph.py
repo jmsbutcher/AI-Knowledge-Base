@@ -1,6 +1,7 @@
 import os
 import pathlib
 from rdflib import Graph, Namespace, Literal, URIRef
+from .common import get_website_dir
 
 
 # The "knowledge base"
@@ -22,24 +23,30 @@ last_added_triple = None
 
 
 
+def get_graph_path(format="n3"):
+    return os.path.join(get_website_dir(), "graph.{}".format(format))
+
+
 def save_graph(save_format="n3"):
     """ Save graph file """
-    graph.serialize(destination="graph.{}".format(save_format), format=save_format)
+    #graph.serialize(destination="graph.{}".format(save_format), format=save_format)
+    graph.serialize(destination=get_graph_path().format(save_format), format=save_format)
     print("Saved graph as graph.{}".format(save_format))
 
 
 def load_graph(load_format=None):
     """ Load saved graph file """
 
-    script_dir = os.path.dirname(os.path.abspath(__file__))
+    # script_dir = os.path.dirname(os.path.abspath(__file__))
 
-    script_dir = script_dir.replace("\\\\wsl.localhost\\", "\\\\")
+    # script_dir = script_dir.replace("\\\\wsl.localhost\\", "\\\\")
 
-    print("Script dir:", script_dir, "\n")
+    # print("Script dir:", script_dir, "\n")
 
     # Construct the path to the graph file relative to the script directory
-    graph_file = os.path.join(script_dir, "graph.n3")
-    print("graph file:", graph_file, "\n")
+    #graph_file = os.path.join(script_dir, "graph.n3")
+    graph_file = get_graph_path()
+    print("graph file: ", graph_file, "\n")
 
     # Load the graph using rdflib
     graph.parse(location=graph_file, format="n3")
@@ -93,6 +100,30 @@ def load_graph(load_format=None):
         except FileNotFoundError:
             print("Graph file 'graph.{}' not found.".format(load_format))
             return False
+
+
+
+#-----------------------------------------------------------------------------------------------------
+# Query functions
+#-----------------------------------------------------------------------------------------------------
+
+def get_all_topics():
+    topics_set = set()
+    for (s, _, _) in graph.triples((None, None, None)):
+        topics_set.add(isolate_last_part_of_URI(s))
+    topics = list(topics_set)
+    topics.sort()
+    return topics
+
+# def get_objects(topic, relation, target=None):
+#     """ Get all the objects of a relation for the given subject. """  
+#     objs = graph.triples((string_to_URI(topic), relation, target))
+#     return [isolate_last_part_of_URI(a[2]).replace("_", " ") for a in objs]
+
+# def get_subjects(topic, relation, target=None):
+#     """ Get all the subjects of a relation for the given object. """  
+#     subs = graph.triples((target, relation, string_to_URI(topic)))
+#     return [isolate_last_part_of_URI(a[0]).replace("_", " ") for a in subs]
 
 
 #-----------------------------------------------------------------------------------------------------

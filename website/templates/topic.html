@@ -2,7 +2,7 @@
 {% extends "base.html" %}
 
 
-{% block title %}{{ topic.name }}{% endblock %}
+{% block title %}{{ topic }}{% endblock %}
 
 
 {% block heading %}
@@ -47,13 +47,25 @@
     </ul>
 {% endif %}
 
-<!-- Definition -->
-{% if capabilities|length > 0 %}
-    <h3>Capabilities:</h3>
+<!-- Applications -->
+{% if applications|length > 0 %}
+    <h3>Applications:</h3>
     <ul>
-        {% for capability in capabilities %}
+        {% for application in applications %}
         
-            <li>{{ capability }}</li>
+            <li><a href="{{ url_for('views.topic', topic=application) }}">{{ application.title() }}</a></li>
+        
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<!-- Methods -->
+{% if methods|length > 0 %}
+    <h3>Methods:</h3>
+    <ul>
+        {% for method in methods %}
+        
+            <li><a href="{{ url_for('views.topic', topic=method) }}">{{ method.title() }}</a></li>
         
         {% endfor %}
     </ul>
@@ -99,16 +111,17 @@
     </ul>
 {% endif %}
 
-{#
-{% for content_page in content_pages %}
-    <h2><a href="{{ url_for('content_page', content_page_id=content_page.id) }}">{{ content_page.title }}</a></h2>
-    {{ content_page.content | safe }}
-    {{ content_page.code_snippet }}
-    {% for link in links %}
-        <p>Related topic: <a href="{{ url_for('topic', topic_id=link.target_topic_id) }}">{{ link.target_topic.name }}</a></p>
-    {% endfor %}
-{% endfor %}
-#}
+<!-- Examples -->
+{% if examples|length > 0 %}
+    <h3>Examples:</h3>
+    <ul>
+        {% for example in examples %}
+        
+        <li><a href="{{ url_for('views.example_page', example=example) }}" target="_blank">{{ example }}</a></li>
+        
+        {% endfor %}
+    </ul>
+{% endif %}
 
 
 {% endblock %}

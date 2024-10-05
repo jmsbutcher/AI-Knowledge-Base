@@ -64,6 +64,8 @@
     {% endfor %}
 </ul>
 
-<p>End</p>
+
+<a href="{{ url_for('views.download', filepath='graph.n3') }}">Download graph</a>
+
 
 {% endblock %}

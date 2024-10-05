@@ -8,16 +8,61 @@
 
 {% block content %}
 
+
+
+
+<div class="container-sm">
+
+    <div class="row">
+
+        <div class="col-sm">
+
+            <h1>Methods</h1>
+            <ul>
+                
+                {% for method in methods %}
+                    <li><a href="{{ url_for('views.topic', topic=method) }}">{{ method.replace("_", " ").title() }}</a></li>
+                {% endfor %}
+                
+            </ul>
+
+        </div>
+
+        <div class="col-sm">
+
+            <h1>Applications</h1>
+            <ul>
+                
+                {% for application in applications %}
+                    <li><a href="{{ url_for('views.topic', topic=application) }}">{{ application.replace("_", " ").title() }}</a></li>
+                {% endfor %}
+                
+            </ul>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
 <div class="container-sm">
 
 
+
+
+<!--
 <h1>Index</h1>
 <ul>
+    
     {% for topic in topics %}
-        <li><a href="{{ url_for('views.topic', topic_id=topic.id) }}">{{ topic.textname }}</a></li>
+        <li><a href="{{ url_for('views.topic', topic=topic) }}">{{ topic.replace("_", " ").title() }}</a></li>
     {% endfor %}
+    
 </ul>
-
+-->
 
 <h4>Introduction</h4>
 
