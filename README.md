@@ -1,16 +1,14 @@
 # AI-Knowledge-Base
 
-[# machine-learning-knowledge-base
-
 ### A web app for managing and accessing my personally-curated collection of machine learning knowledge, encoded as an RDF knowledge graph
-Version 1.0
-March 28, 2021
+Version 2.1
+October 2024
 by James Butcher
 jmsbutcher1576@gmail.com
 
-Access the site here: <a href="https://aikb-bfe2tw67tq-nn.a.run.app/" target="_blank" rel="noopener">ML Knowledge Base</a>
+Access the site here: <a href="https://aikb-bfe2tw67tq-ue.a.run.app/" target="_blank" rel="noopener">AI Knowledge Base</a>
 
-[https://aikb-bfe2tw67tq-nn.a.run.app/](https://aikb-bfe2tw67tq-nn.a.run.app/)
+[https://aikb-bfe2tw67tq-ue.a.run.app/](https://aikb-bfe2tw67tq-ue.a.run.app/)
 
 ## Overview:
 
@@ -19,19 +17,18 @@ Artificial Intelligence Knowledge Base
 - A web app designed to easily manage and access a knowledge base
 - The knowledge base is intended for my collection of machine learning knowledge, but can be used for any other domain as well.
 
-4 pages:
+5 pages:
 - Home page: Introduction and instructions on how to use
 - Knowledge base: Add and remove RDF triples
 - Recommender: Select an application and get info on ML methods that can do it
 - Custom Query: Make simple queries on the knowledge base
+- Ask Chatbot: Chat with a RAG (Retrieval-Augmented Generation) service running on AWS that uses the knowledge base material as context.
 
-This was my first web app. The whole basic structure was built by following this YouTube video:
+Thanks to Tech with Tim for this YouTube video to help get the basics of the original website working:
 
 - <i>Python Website Full Tutorial - Flask, Authentication, Databases & More by Tech With Tim</i> Feb 1, 2021 https://www.youtube.com/watch?v=dam0GPOAvVI&list=PLwGZ7X2gMChQbGLrYP57YW2S_lrknkw1_&index=57
 
-I deployed the app to the web using Heroku, and by following this Youtube video:
-
-- <i>Push Flask Apps To Heroku For Webhosting - Python and Flask #11</i> by Codemy.com - Jun 2, 2020 https://www.youtube.com/watch?v=Li0Abz-KT78
+I deployed the app to the web using Google Cloud Run.
 
 My introduction to the subject of ontology, knowledge graphs, and RDF came from the online course I took
 for my MCS - Masters of Computer Science degree from ASU on Coursera, taken in Spring A 2021:
@@ -40,7 +37,7 @@ for my MCS - Masters of Computer Science degree from ASU on Coursera, taken in S
 
 ## Introduction:
 
-<p>Welcome to my carefully-curated base of machine learning knowledge!</p>
+<p>Welcome to my carefully-curated base of AI and machine learning knowledge!</p>
 <p>Here I plan to keep all kinds of information about machine learning methods and how they compare. There are so many out there 
    that it is easy to get lost. After studying the topic for over three years I am still overwhelmed by the immensity of the field.
    Hopefully this project will serve as a helpful reference for me as I learn and grow in experience working with machine learning.</p>
@@ -72,7 +69,7 @@ for my MCS - Masters of Computer Science degree from ASU on Coursera, taken in S
 
 ## Add/Remove Triples from Knowledge Base
 
-<p>The <a href="https://ml-knowledgebase.herokuapp.com/knowledge-base" target="_blank">Knowledge Base</a> page lists all the triples currently in the knowledge base.</p>
+<p>The <a href="https://aikb-bfe2tw67tq-ue.a.run.app/knowledge-base" target="_blank">Knowledge Base</a> page lists all the triples currently in the knowledge base.</p>
 <p><b>To add a triple:</b> Enter a subject, a predicate, and an object in the corresponding input fields and click enter.
 Be sure to use consistent spelling when entering multiple triples containing the same thing. Some inputs are case-sensitive.</p>
 <p><b>To delete a triple:</b> Simply scroll down to the triple you want to delete and click the 'X' on the right.
@@ -84,7 +81,7 @@ Be sure to use consistent spelling when entering multiple triples containing the
 
 ## Recommender Tool
 
-<p>The <a href="https://ml-knowledgebase.herokuapp.com/recommender" target="_blank">Recommender</a> page lets you select the application you are interested in and then generates a neat list of relevant
+<p>The <a href="https://aikb-bfe2tw67tq-ue.a.run.app/recommender" target="_blank">Recommender</a> page lets you select the application you are interested in and then generates a neat list of relevant
     machine learning methods and information about each one, including their advantages and disadvantages. 
 </p>
 <p>It does this by querying the knowledge base for all subjects that meet the criteria: [subject] --> can do --> [selected application],
@@ -97,7 +94,7 @@ Be sure to use consistent spelling when entering multiple triples containing the
 
 ## Custom Queries
 
-<p>The <a href="https://ml-knowledgebase.herokuapp.com/query" target="_blank">Custom Query</a> page lets you examine the knowledge base in more detail.</p>
+<p>The <a href="https://aikb-bfe2tw67tq-ue.a.run.app/query" target="_blank">Custom Query</a> page lets you examine the knowledge base in more detail.</p>
 <p>Select the subject, predicate, or object you are interested in while leaving the other fields with the default '?'
     selection acting as a wildcard, and the program will fetch all the triples that meet the criteria.
 </p>
@@ -117,6 +114,6 @@ Be sure to use consistent spelling when entering multiple triples containing the
 
 <hr>
 
-<p>&copy; <i>James Butcher 2021 - jmsbutcher1567@gmail.com</i></p>
+<p>&copy; <i>James Butcher 2024 - jmsbutcher1567@gmail.com</i></p>
 
 ](https://www.linkedin.com/in/james-butcher-275a2080/)
