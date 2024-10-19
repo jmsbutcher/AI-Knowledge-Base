@@ -110,10 +110,22 @@ Be sure to use consistent spelling when entering multiple triples containing the
 <img src="https://github.com/jmsbutcher/machine-learning-knowledge-base/blob/master/images/query_page2.PNG">
 
 <br />
+
+## Ask Chatbot
+
+<p>The <a href="https://aikb-bfe2tw67tq-ue.a.run.app/query-rag" target="_blank">Ask Chatbot</a> page lets you ask natural-language questions about the knowledge base to an LLM.</p>
+
+<img src="https://github.com/jmsbutcher/AWS-RAG-AI-service/blob/main/readmeImages/usageScreenshot.png">
+
+<p>See the project used to create and deploy the service here: <a href="https://github.com/jmsbutcher/AWS-RAG-AI-service/" target="_blank">AWS-RAG-AI-service</a></p>
+
+
+
+<br />
 <br />
 
 <hr>
 
 <p>&copy; <i>James Butcher 2024 - jmsbutcher1567@gmail.com</i></p>
 
-](https://www.linkedin.com/in/james-butcher-275a2080/)
+[My LinkedIn](https://www.linkedin.com/in/james-butcher-275a2080/)
